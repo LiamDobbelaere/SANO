@@ -1,0 +1,96 @@
+/**
+Global stuff
+ */
+::-moz-selection {
+    background: #007a00;
+    color: white;
+}
+
+::selection {
+    background: #007a00;
+    color: white;
+}
+
+body {
+    font-family: 'Muli', sans-serif;
+}
+
+/**
+Reusable styles
+ */
+.gradient-bg {
+    background: #00c500; /* Old browsers */
+    background: -moz-linear-gradient(top, #00c500 0%, #007a00 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #00c500 0%, #007a00 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #00c500 0%, #007a00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00c500', endColorstr='#007a00', GradientType=0); /* IE6-9 */
+}
+
+/**
+Main layout
+ */
+header {
+    background-image: url("../media/sano_green.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
+}
+
+header h1 {
+    color: #00a500;
+    padding-left: 64px;
+}
+
+@media (max-width: 550px) {
+    header h1 {
+        padding-left: 48px;
+    }
+}
+
+header:not(.mobile) h1 {
+    background: -webkit-linear-gradient(#00c500, #007a00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+header.mobile {
+    background-image: url("../media/sano_white.png");
+    background-color: #00a500;
+    background-size: 32px;
+    background-position-x: 8px;
+}
+
+header.mobile h1 {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: white;
+    font-size: 3.0rem;
+}
+
+@media (min-width: 400px) {
+    header.mobile {
+        display: none;
+    }
+
+    header:not(.mobile) {
+        display: block;
+    }
+
+    body {
+        padding-top: 16px;
+    }
+}
+
+@media (max-width: 400px) {
+    header:not(.mobile) {
+        display: none;
+    }
+
+    header.mobile {
+        display: block;
+    }
+
+    body {
+        padding-top: 0;
+    }
+}
