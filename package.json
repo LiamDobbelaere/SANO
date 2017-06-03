@@ -17,5 +17,12 @@
     "url": "https://github.com/TomDobbelaere/SANO/issues"
   },
   "homepage": "https://github.com/TomDobbelaere/SANO#readme",
-  "dependencies": {}
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.15.3",
+    "express-logging": "^1.1.1",
+    "express-session": "^1.15.3",
+    "morgan": "^1.8.2",
+    "terminal-kit": "^1.8.13"
+  }
 }
