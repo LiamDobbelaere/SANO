@@ -1,6 +1,6 @@
-#SANO system
+# SANO system
 
-##Notes before running
+## Notes before running
 Make sure a .env file is present with the following variables:  
 `SANO_WEB_SESSIONSECRET=`  
 `SANO_DATA_IP=`  
