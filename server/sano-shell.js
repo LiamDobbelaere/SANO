@@ -17,6 +17,8 @@ function Command(info, func) {
 }
 
 function init() {
+    console.log("sano-shell ok");
+
     return {
         Command: Command,
         commands: commands,

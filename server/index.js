@@ -1,21 +1,11 @@
 require('dotenv').config();
 const shell = require("./sano-shell.js")();
-const data = require("./sano-data.js")();
-const web = require("./sano-web.js")();
-
-data.validateUser({
-    login: "newguy",
-    password: "newpwd"
-}).then(console.log);
-
-/*data.addUser({
-    login: "abcdef",
-    password: "abcdef",
-}).then(val => console.log(val))
-    .catch(err => console.log(err));*/
+const data = require("./sano-data.js")(shell);
+const web = require("./sano-web.js")(data);
+const chat = require("./sano-chat")(web.session);
 
 //shell.commands["custom"] = new shell.Command("test", () => shell.term("fuck"));
-//shell.prompt();
+if (process.env.SANO_SHELL_DISABLE !== "true") shell.prompt();
 
 /*
 

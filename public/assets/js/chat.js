@@ -1,13 +1,25 @@
 $(function () {
+    var socket = io("http://localhost:3000");
+
+    socket.on("chat-receive", function(message) {
+        receiveChatMessage(message.source, message.message);
+    });
+
     scrollToBottom();
-    setInterval(function() {
+    /*setInterval(function() {
         if (Math.random() < 0.5) {
             receiveChatMessage("self", "Sample response");
         } else {
             receiveChatMessage("remote", "Sample other talking");
         }
+    }, 1000);*/
 
-    }, 1000);
+    $("#chat-input-mobile").on("keypress", function(e) {
+        if (e.which === 13) {
+            socket.emit("chat-send", $(this).val());
+            $(this).val("");
+        }
+    })
 });
 
 function scrollToBottom() {

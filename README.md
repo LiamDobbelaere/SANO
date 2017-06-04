@@ -2,9 +2,10 @@
 
 ## Notes before running
 Make sure a .env file is present with the following variables:  
-`SANO_WEB_SESSIONSECRET=`  
-`SANO_DATA_IP=`  
-`SANO_DATA_PORT=`  
-`SANO_DATA_DB=`  
-`SANO_DATA_USER=`  
-`SANO_DATA_PW=`  
+`SANO_WEB_SESSIONSECRET=` Secret key for session stuff  
+`SANO_DATA_IP=` MySQL address  
+`SANO_DATA_PORT=` MySQL port  
+`SANO_DATA_DB=` MySQL database name  
+`SANO_DATA_USER=` MySQL username  
+`SANO_DATA_PW=` MySQL password  
+`SANO_SHELL_DISABLE=` Disable shell on startup

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/head.ejs %>
+<body>
+
+<header class="mobile">
+    <h1>SANO</h1>
+</header>
+
+<div class="container">
+    <% include partials/header.ejs %>
+
+    <div id="chat">
+        <h2>Chat</h2>
+        <ul>
+            <li class="server">Some generic info and <a href="#">a link</a></li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+
+        </ul>
+    </div>
+</div>
+
+<input id="chat-input-mobile" type="text" placeholder="Enter a message"/>
+
+<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="assets/js/socket.io.js"></script>
+<script type="text/javascript" src="assets/js/chat.js"></script>
+</body>
+</html>
