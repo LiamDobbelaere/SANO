@@ -31,18 +31,29 @@ Reusable styles
 Main layout
  */
 header {
+
+}
+
+header ul {
+    display: inline-block;
+}
+
+header ul li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+header h1 {
+    display: inline-block;
+    color: #00a500;
+    padding-left: 64px;
     background-image: url("../media/sano_green.png");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: left center;
-}
-
-header h1 {
-    color: #00a500;
-    padding-left: 64px;
-    background: -webkit-linear-gradient(#00c500, #007a00);
+    /*    background: -webkit-linear-gradient(#00c500, #007a00);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: transparent;*/
 }
 
 @media (max-width: 550px) {
