@@ -10,21 +10,14 @@
 <div class="container">
     <% include partials/header.ejs %>
 
-    <form action="/login.do" method="post">
-        <fieldset>
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" required/>
-        </fieldset>
-        <fieldset>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" required/>
-        </fieldset>
-
-        <input type="submit" class="button-primary" value="Continue"/>
-    </form>
+    <span id="dispatch-status">Dispatch status</span>
+    <span id="dispatch-button" class="clickable">
+        <span class="bar"></span>
+    </span>
+    <span id="dispatch-available">
+        <span class="dot-status"></span>Querying...
+    </span>
 </div>
-
-<input id="chat-input-mobile" type="text" placeholder="Enter a message"/>
 
 <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<% include partials/head.ejs %>
+<body>
+
+<header class="mobile">
+    <h1>SANO</h1>
+</header>
+
+<div class="container">
+    <% include partials/header.ejs %>
+
+    <form action="/login.do" method="post">
+        <fieldset>
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" required/>
+        </fieldset>
+        <fieldset>
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" required/>
+        </fieldset>
+
+        <input type="submit" class="button-primary" value="Continue"/>
+    </form>
+</div>
+
+<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+<!--<script type="text/javascript" src="assetschat.jst.js"></script>-->
+</body>
+</html>
