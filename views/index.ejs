@@ -9,6 +9,13 @@
 
 <div class="container">
     <% include partials/header.ejs %>
+    <% if (typeof(id) !== 'undefined') {%>
+
+    <script type="text/javascript">
+        var respondingId = "<%=id%>";
+    </script>
+
+    <% } %>
 
     <div id="dispatch">
         <div id="dispatch-code-container">
@@ -39,23 +46,17 @@
     <div id="chat" style="display: none;">
         <h2>Chat</h2>
         <ul>
-            <li class="server">Some generic info and <a href="#">a link</a></li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
-            <li class="remote">Blegh</li>
 
         </ul>
     </div>
+
+    <input style="display: none" id="chat-input-mobile" type="text" placeholder="Enter a message"/>
+
 </div>
 
-<script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/assets/js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="assets/js/request.js"></script>
+<script type="text/javascript" src="/assets/js/request.js"></script>
 </body>
 </html>

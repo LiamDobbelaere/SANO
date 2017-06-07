@@ -8,13 +8,6 @@ $(function () {
      receiveChatMessage("remote", "Sample other talking");
      }
      }, 1000);*/
-
-    $("#chat-input-mobile").on("keypress", function(e) {
-        if (e.which === 13) {
-            socket.emit("chat-send", $(this).val());
-            $(this).val("");
-        }
-    })
 });
 
 function initSocketIO() {
@@ -23,7 +16,9 @@ function initSocketIO() {
     socket.on("connect", function() {
         console.log("Socket connected!");
 
-        socket.emit("client-request-ticket");
+        if (typeof(respondingId) === "undefined") {
+            socket.emit("client-request-ticket");
+        }
     });
 
     socket.on("chat-receive", function(message) {
@@ -54,6 +49,16 @@ function initSocketIO() {
         $(this).addClass("disabled");
     });
 
+    if (typeof(respondingId) !== "undefined") {
+        socket.emit("respond-to-ticket", respondingId);
+    }
+
+    socket.on("display-chat", function() {
+        $("#dispatch").hide();
+        $("#chat").show();
+        $("#chat-input-mobile").show();
+    });
+
     socket.on("available-responders", function(count) {
         if (count > 0) {
             $("#dispatch-available").find(".dot-status").addClass("online");
@@ -63,6 +68,13 @@ function initSocketIO() {
 
         $("#dispatch-available").find(".content").text(count + " responder(s) available");
     });
+
+    $("#chat-input-mobile").on("keypress", function(e) {
+        if (e.which === 13) {
+            socket.emit("chat-send", $(this).val());
+            $(this).val("");
+        }
+    })
 }
 
 function scrollToBottom() {

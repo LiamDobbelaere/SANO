@@ -9,6 +9,7 @@ function init(session, httpserver, dispatch, data) {
 
     socketio.on("connect", function(socket) {
         //console.log(socket.request.session);
+        let chatid = "";
 
         data.getAvailableResponderCount().then((count) => {
             socket.emit("available-responders", count);
@@ -17,13 +18,31 @@ function init(session, httpserver, dispatch, data) {
         socket.on("client-request-ticket", function() {
             let newDispatch = dispatch.requestList.addRequest(socket.id);
 
-            socket.join(newDispatch.id);
+            chatid = newDispatch.id;
+            socket.join(chatid);
 
             let exposedData = {
                 code: newDispatch.code
             };
 
             socket.emit("client-receive-ticket", exposedData);
+        });
+
+        socket.on("respond-to-ticket", function(id) {
+            let disp = dispatch.requestList.getRequestById(id);
+
+            if (typeof(socket.request.session.login) !== "undefined" && disp.answered === false) {
+                disp.answer();
+
+                chatid = id;
+
+                socket.join(chatid);
+                socketio.in(chatid).emit("display-chat");
+                socketio.in(chatid).emit("chat-receive", {
+                    source: "server",
+                    message: "Check your code: " + disp.code
+                });
+            }
         });
 
         socket.on("client-use-ticket", function() {
@@ -45,7 +64,7 @@ function init(session, httpserver, dispatch, data) {
         });
 
         socket.on("chat-send", function(message) {
-            socket.broadcast.emit("chat-receive", {
+            socket.broadcast.to(chatid).emit("chat-receive", {
                 source: "remote",
                 message: message
             });
@@ -58,6 +77,11 @@ function init(session, httpserver, dispatch, data) {
 
         socket.on("disconnect", function() {
             dispatch.requestList.removeRequestBySocketId(socket.id);
+
+            socketio.in(chatid).emit("chat-receive", {
+                source: "server",
+                message: "The other person has disconnected."
+            });
         });
     });
 

@@ -38,7 +38,7 @@ let sessionFinal = session({
 const bodyParser = require('body-parser');
 const appTitle = "SANO";
 
-function init(data) {
+function init(data, dispatch) {
     server.listen(80);
 
     let accessLogStream = fs.createWriteStream(path.join(__dirname, '/../express.log'), {flags: 'a'});
@@ -57,14 +57,25 @@ function init(data) {
         });
     });
 
+    app.get("/login", function (req, res) {
+        res.render("login", {
+            title: appTitle
+        });
+    });
+
     //Todo: make login filter more abstract
-    app.get("/chat", function (req, res) {
-        if (req.session.login) {
-            res.render("chat", {
-                title: appTitle
+    app.get("/respond/:id", function (req, res) {
+        if (req.session.login && typeof(dispatch.requestList.getRequestById(req.params.id)) !== 'undefined') {
+            res.render("index", {
+                title: appTitle,
+                id: req.params.id
             });
         } else {
-            res.redirect("/");
+            if (req.session.login) {
+                res.redirect("/");
+            } else {
+                res.redirect("/login");
+            }
         }
     });
 
@@ -74,7 +85,7 @@ function init(data) {
             password: req.body.password
         }).then(() => {
             req.session.login = req.body.username;
-            res.redirect("/chat");
+            res.redirect("/index");
         }).catch((err) => {
             console.log(err);
             res.redirect("/");
