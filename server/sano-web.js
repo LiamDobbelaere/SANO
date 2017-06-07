@@ -14,7 +14,7 @@ const sessionStore = new MySQLStore({
     user: process.env.SANO_DATA_USER,
     password: process.env.SANO_DATA_PW,
     checkExpirationInterval: 900000,
-    expiration: 86400000,
+    expiration: 30 * 24 * 60 * 60 * 1000,
     createDatabaseTable: true,
     connectionLimit: 20,
     schema: {

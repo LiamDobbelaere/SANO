@@ -2,12 +2,12 @@ const shortid = require('shortid');
 const randomWords = require('random-words');
 const waitTime = 5;
 
-function RequestList(data){
+function RequestList(discord){
     let self = this;
 
     this.requests = [];
     this.addRequest = function(socketid) {
-        let newRequest = new DispatchRequest(socketid);
+        let newRequest = new DispatchRequest(socketid, discord);
 
         self.requests.push(newRequest);
 
@@ -30,7 +30,7 @@ function RequestList(data){
     };
 }
 
-function DispatchRequest(socketid) {
+function DispatchRequest(socketid, discord) {
     this.socketid = socketid;
     this.id = shortid.generate();
     this.code = randomWords({exactly: 2, join: "-"});
@@ -40,6 +40,7 @@ function DispatchRequest(socketid) {
 
     this.start = function() {
         this.started = true;
+        discord.notifyNewRequest(this.id);
     };
 
     this.answer = function() {
@@ -51,9 +52,9 @@ function DispatchRequest(socketid) {
     };
 }
 
-const requestList = new RequestList();
+function init(data, shell, discord) {
+    const requestList = new RequestList(discord);
 
-function init(data, shell) {
     if (typeof(shell) !== "undefined") {
         shell.commands["showrequests"] = new shell.Command("Shows all current dispatch requests", (par, done) => {
             requestList.requests.forEach(function (item) {

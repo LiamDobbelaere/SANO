@@ -8,4 +8,5 @@ Make sure a .env file is present with the following variables:
 `SANO_DATA_DB=` MySQL database name  
 `SANO_DATA_USER=` MySQL username  
 `SANO_DATA_PW=` MySQL password  
+`SANO_DISCORD_TOKEN=` Token for the Discord bot  
 `SANO_SHELL_DISABLE=` Disable shell on startup

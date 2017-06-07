@@ -1,7 +1,8 @@
 require('dotenv').config();
 const shell = require("./sano-shell.js")();
 const data = require("./sano-data.js")(shell);
-const dispatch = require("./sano-dispatch")(data, shell);
+const discord = require("./sano-discord.js")();
+const dispatch = require("./sano-dispatch")(data, shell, discord);
 const web = require("./sano-web.js")(data, dispatch);
 const chat = require("./sano-chat")(web.session, web.httpserver, dispatch, data);
 
