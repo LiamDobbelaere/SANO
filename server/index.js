@@ -7,7 +7,10 @@ const web = require("./sano-web.js")(data, dispatch);
 const chat = require("./sano-chat")(web.session, web.httpserver, dispatch, data);
 
 //shell.commands["custom"] = new shell.Command("test", () => shell.term("fuck"));
-if (process.env.SANO_SHELL_DISABLE !== "true") shell.prompt();
+if (process.env.SANO_SHELL_DISABLE !== "true") {
+    console.log("Starting shell in 5 seconds...");
+    setTimeout(shell.prompt, 5000);
+}
 
 /*
 
