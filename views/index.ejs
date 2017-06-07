@@ -10,13 +10,31 @@
 <div class="container">
     <% include partials/header.ejs %>
 
-    <span id="dispatch-status">Dispatch status</span>
-    <span id="dispatch-button" class="clickable">
+
+    <div id="dispatch-code-container">
+        <p>
+            Your safe code is:
+        </p>
+    <span id="dispatch-code">dog-waffle</span>
+        <p>
+            Please check for this code when starting a chat with a responder.
+        </p>
+    </div>
+
+
+    <span id="dispatch-status"></span>
+    <span id="dispatch-progress">
         <span class="bar"></span>
     </span>
     <span id="dispatch-available">
-        <span class="dot-status"></span>Querying...
+        <span class="dot-status"></span>
+        <span class="content">Please wait...</span>
     </span>
+    <a href="#" id="dispatch-button">
+        TEST
+    </a>
+
+
 </div>
 
 <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>

@@ -99,7 +99,8 @@ function init(data) {
     console.log("sano-web ok");
 
     return {
-        session: sessionFinal
+        session: sessionFinal,
+        httpserver: server
     }
 }
 

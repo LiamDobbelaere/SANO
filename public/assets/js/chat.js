@@ -1,5 +1,5 @@
 $(function () {
-    var socket = io("http://localhost:3000");
+    var socket = io();
 
     socket.on("chat-receive", function(message) {
         receiveChatMessage(message.source, message.message);

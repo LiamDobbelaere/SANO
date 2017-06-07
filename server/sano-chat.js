@@ -1,7 +1,8 @@
 const io = require("socket.io");
-const socketio = io.listen(3000);
 
-function init(session) {
+function init(session, httpserver, dispatch) {
+    const socketio = io(httpserver);
+
     socketio.use(function(socket, next) {
         session(socket.request, socket.request.res, next);
     });

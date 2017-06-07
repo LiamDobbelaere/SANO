@@ -178,15 +178,11 @@ h2 {
     margin-left: -16px;
 }
 
-#dispatch-button, #dispatch-button .bar {
+#dispatch-progress, #dispatch-progress .bar {
     transition: 2s border-radius ease-in-out;
 }
 
-#dispatch-button.clickable:hover {
-    border-radius: 0;
-}
-
-#dispatch-button .bar {
+#dispatch-progress .bar {
     content: "";
     width: 50%;
     height: 100%;
@@ -197,6 +193,55 @@ h2 {
 }
 
 #dispatch-button {
+    background-color: #00a500;
+    height: 50px;
+    width: 100%;
+    color: white;
+    text-decoration: none;
+    display: block;
+    line-height: 50px;
+    text-align: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+#dispatch-button:hover {
+    background-color: #007a00;
+}
+
+#dispatch-button.disabled {
+    background-color: gray;
+}
+
+#dispatch-button.escalate {
+    background-color: #f5c12a;
+}
+
+#dispatch-button.escalate:hover {
+    background-color: #f5c12a;
+}
+
+#dispatch-code {
+    text-align: center;
+    display: block;
+    color: #007a00;
+    font-size: 3.5rem;
+    font-family: monospace;
+    font-weight: bold;
+    margin-bottom: 16px;
+}
+
+#dispatch-code-container {
+    max-width: 300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dispatch-progress {
     background-color: #ebebeb;
     text-decoration: none;
     height: 8px;
@@ -206,23 +251,15 @@ h2 {
     position: relative;
 }
 
-#dispatch-button.escalated {
-    border: 4px solid #f5c12a;
-}
-
-#dispatch-button.escalated .bar {
+#dispatch-progress.escalated .bar {
     background-color: #f5c12a;
 }
 
-#dispatch-button.notice {
-    border: 4px solid #0680ff;
-}
-
-#dispatch-button.notice .bar {
+#dispatch-progress.notice .bar {
     background-color: #0680ff;
 }
 
-#dispatch-button, #dispatch-status, #dispatch-available {
+#dispatch-progress, #dispatch-status, #dispatch-available {
     max-width: 300px;
     width: 100%;
     margin-left: auto;
@@ -231,6 +268,10 @@ h2 {
 
 #dispatch-status, #dispatch-available {
     display: block;
+}
+
+#dispatch-available {
+    margin-bottom: 16px;
 }
 
 .dot-status {
