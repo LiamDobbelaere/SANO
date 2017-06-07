@@ -1,4 +1,23 @@
 $(function () {
+    initSocketIO();
+    scrollToBottom();
+    /*setInterval(function() {
+     if (Math.random() < 0.5) {
+     receiveChatMessage("self", "Sample response");
+     } else {
+     receiveChatMessage("remote", "Sample other talking");
+     }
+     }, 1000);*/
+
+    $("#chat-input-mobile").on("keypress", function(e) {
+        if (e.which === 13) {
+            socket.emit("chat-send", $(this).val());
+            $(this).val("");
+        }
+    })
+});
+
+function initSocketIO() {
     var socket = io();
 
     socket.on("connect", function() {
@@ -16,22 +35,35 @@ $(function () {
         $("#dispatch-button").fadeIn(500);
     });
 
-    scrollToBottom();
-    /*setInterval(function() {
-     if (Math.random() < 0.5) {
-     receiveChatMessage("self", "Sample response");
-     } else {
-     receiveChatMessage("remote", "Sample other talking");
-     }
-     }, 1000);*/
+    socket.on("client-allow-escalate", function() {
+        $("#dispatch-button").removeClass("disabled").addClass("escalate").text("Escalate");
+    });
 
-    $("#chat-input-mobile").on("keypress", function(e) {
-        if (e.which === 13) {
-            socket.emit("chat-send", $(this).val());
-            $(this).val("");
+    socket.on("update-timeleft", function(time) {
+        $("#dispatch-status").text("Contacted responders, please wait..");
+
+        var $bar = $("#dispatch-progress").find(".bar");
+
+        $bar.css("width", "100%");
+        $bar.css("transition", "width " + time + "s linear");
+        $bar.css("width", "0%");
+    });
+
+    $("#dispatch-button").on("click", function() {
+        socket.emit("client-use-ticket");
+        $(this).addClass("disabled");
+    });
+
+    socket.on("available-responders", function(count) {
+        if (count > 0) {
+            $("#dispatch-available").find(".dot-status").addClass("online");
+        } else {
+            $("#dispatch-available").find(".dot-status").addClass("offline");
         }
-    })
-});
+
+        $("#dispatch-available").find(".content").text(count + " responder(s) available");
+    });
+}
 
 function scrollToBottom() {
     $('html, body').animate({

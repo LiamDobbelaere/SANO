@@ -11,7 +11,8 @@ const pool = mysql.createPool({
 
 const queries = {
     "ADD_USER": "INSERT INTO responder (login, password) VALUES (?, ?)",
-    "GET_USER": "SELECT login, password FROM responder WHERE login = ?"
+    "GET_USER": "SELECT login, password FROM responder WHERE login = ?",
+    "GET_RESPONDERCOUNT": "SELECT COUNT(*) AS count FROM responder"
 };
 
 function query(query, args) {
@@ -52,6 +53,16 @@ function validateUser(user) {
     });
 }
 
+function getAvailableResponderCount() {
+    return new Promise((resolve, reject) => {
+        query(queries.GET_RESPONDERCOUNT, [])
+            .then(resultSet => {
+                resolve(resultSet[0].count);
+            })
+            .catch(error => reject(error));
+    });
+}
+
 function init(shell) {
     if (typeof(shell) !== "undefined") {
         shell.commands["adduser"] = new shell.Command("adduser <name> <password>", (par, done) => {
@@ -74,7 +85,8 @@ function init(shell) {
 
     return {
         addUser: addUser,
-        validateUser: validateUser
+        validateUser: validateUser,
+        getAvailableResponderCount: getAvailableResponderCount
     }
 }
 

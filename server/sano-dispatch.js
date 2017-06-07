@@ -1,7 +1,8 @@
 const shortid = require('shortid');
 const randomWords = require('random-words');
+const waitTime = 5;
 
-function RequestList(){
+function RequestList(data){
     let self = this;
 
     this.requests = [];
@@ -33,6 +34,21 @@ function DispatchRequest(socketid) {
     this.socketid = socketid;
     this.id = shortid.generate();
     this.code = randomWords({exactly: 2, join: "-"});
+    this.started = false;
+    this.answered = false;
+    this.allowEscalation = false;
+
+    this.start = function() {
+        this.started = true;
+    };
+
+    this.answer = function() {
+        this.answered = true;
+    };
+
+    this.allowEscalate = function() {
+        this.allowEscalation = true;
+    };
 }
 
 const requestList = new RequestList();
@@ -53,7 +69,8 @@ function init(data, shell) {
     console.log("sano-dispatch ok");
 
     return {
-        requestList: requestList
+        requestList: requestList,
+        waitTime: waitTime
     }
 }
 
