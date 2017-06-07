@@ -10,35 +10,51 @@
 <div class="container">
     <% include partials/header.ejs %>
 
+    <div id="dispatch">
+        <div id="dispatch-code-container">
+            <p>
+                Your safe code is:
+            </p>
+            <span id="dispatch-code"></span>
+            <p>
+                Please check for this code when starting a chat with a responder.
+            </p>
+        </div>
 
-    <div id="dispatch-code-container">
-        <p>
-            Your safe code is:
-        </p>
-    <span id="dispatch-code">dog-waffle</span>
-        <p>
-            Please check for this code when starting a chat with a responder.
-        </p>
-    </div>
 
-
-    <span id="dispatch-status"></span>
-    <span id="dispatch-progress">
+        <span id="dispatch-status"></span>
+        <span id="dispatch-progress">
         <span class="bar"></span>
     </span>
-    <span id="dispatch-available">
+        <span id="dispatch-available">
         <span class="dot-status"></span>
         <span class="content">Please wait...</span>
     </span>
-    <a href="#" id="dispatch-button">
-        TEST
-    </a>
+        <a href="#" id="dispatch-button" style="display: none">
+            Go
+        </a>
+    </div>
 
+    <div id="chat" style="display: none;">
+        <h2>Chat</h2>
+        <ul>
+            <li class="server">Some generic info and <a href="#">a link</a></li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
+            <li class="remote">Blegh</li>
 
+        </ul>
+    </div>
 </div>
 
 <script type="text/javascript" src="assets/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
-<!--<script type="text/javascript" src="assetschat.jst.js"></script>-->
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="assets/js/request.js"></script>
 </body>
 </html>

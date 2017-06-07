@@ -37,15 +37,23 @@ function DispatchRequest(socketid) {
 
 const requestList = new RequestList();
 
-function createRequest(socketid) {
-    return requestList.addRequest(socketid);
-}
+function init(data, shell) {
+    if (typeof(shell) !== "undefined") {
+        shell.commands["showrequests"] = new shell.Command("Shows all current dispatch requests", (par, done) => {
+            requestList.requests.forEach(function (item) {
+                shell.term(JSON.stringify(item) + "\n");
+            });
 
-function init(data) {
+            shell.term("%s entries", requestList.requests.length);
+
+            done();
+        });
+    }
+
     console.log("sano-dispatch ok");
 
     return {
-        createRequest: createRequest
+        requestList: requestList
     }
 }
 
