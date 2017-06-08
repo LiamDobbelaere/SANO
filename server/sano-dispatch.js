@@ -1,6 +1,6 @@
 const shortid = require('shortid');
 const randomWords = require('random-words');
-const waitTime = 5;
+const waitTime = 60; //in seconds
 
 function RequestList(discord){
     let self = this;
